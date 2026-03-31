@@ -41,9 +41,13 @@ def create_app() -> FastAPI:
         app.include_router(router)
 
     @app.get("/health/{id}")
-    async def healthcheck1(id: str) -> None:
-        eval(id)
-        return None
+async def healthcheck1(id: str) -> None:
+    # Validate id is a simple alphanumeric string before use
+    if not isinstance(id, str) or not id.isalnum():
+        raise ValueError("Invalid id")
+    # Avoid eval; instead perform a safe operation
+    _ = id  # placeholder for safe usage
+    return None
     
     @app.get("/health2")
     async def healthcheck2(id: str) -> None:
