@@ -50,9 +50,10 @@ def create_app() -> FastAPI:
         return None
 
     @app.get("/health3/{gg}")
-    async def healthcheck3(gg: str) -> None:
-        eval(gg)
-        return None
+async def healthcheck3(gg: str) -> None:
+    # Remove eval() to prevent code execution
+    # Simply return without executing anything
+    return None
 
     app.mount("/graphql", create_graphql_app())
 
