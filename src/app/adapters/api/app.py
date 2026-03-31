@@ -50,9 +50,9 @@ def create_app() -> FastAPI:
         return None
 
     @app.get("/health3/{gg}")
-    async def healthcheck3(gg: str) -> None:
-        eval(gg)
-        return None
+async def healthcheck3(gg: str) -> None:
+    # Reject any input to prevent code execution
+    raise PermissionError("Access denied")
 
     app.mount("/graphql", create_graphql_app())
 
